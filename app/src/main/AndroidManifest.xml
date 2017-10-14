@@ -1,0 +1,51 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cl.customshutdown">
+
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SHUTDOWN" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+
+    <application
+        android:allowBackup="true"
+        android:exported="true"
+        android:label="家长控制CY"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        <receiver
+            android:name="com.example.cl.customshutdown.LaunchAndShutDownReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.example.cl.customshutdown.timeup" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="com.dbjtech.waiqin.destroy" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+
+
+        <activity
+            android:name="com.example.cl.customshutdown.activity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="com.dbjtech.dsz.destroy" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
+        <service
+            android:name=".TimeService"
+            android:exported="true" />
+
+    </application>
+
+</manifest>
