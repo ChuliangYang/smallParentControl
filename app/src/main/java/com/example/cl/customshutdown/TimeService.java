@@ -11,9 +11,6 @@ import android.util.Log;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Created by CL on 7/13/17.
- */
 
 public class TimeService extends Service {
     static Boolean canPass = false;

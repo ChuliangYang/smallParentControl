@@ -13,9 +13,7 @@ import java.util.List;
 
 import static android.content.Context.ACTIVITY_SERVICE;
 
-/**
- * Created by CL on 7/13/17.
- */
+
 
 public class LaunchAndShutDownReceiver extends BroadcastReceiver {
 

