@@ -54,7 +54,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-
 public class activity extends AppCompatActivity {
     public static final String my_email = "";
     public static final String my_email2 = "";
@@ -88,6 +87,30 @@ public class activity extends AppCompatActivity {
     private boolean stopShutDown = false;
     private AlarmManager alarmManager;
     private PendingIntent pendingIntent;
+
+    /*
+         * 判断服务是否启动,context上下文对象 ，className服务的name
+         */
+    public static boolean isServiceRunning(Context mContext, String className) {
+
+        boolean isRunning = false;
+        ActivityManager activityManager = (ActivityManager) mContext
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> serviceList = activityManager
+                .getRunningServices(30);
+
+        if (!(serviceList.size() > 0)) {
+            return false;
+        }
+
+        for (int i = 0; i < serviceList.size(); i++) {
+            if (serviceList.get(i).service.getClassName().contains(className) == true) {
+                isRunning = true;
+                break;
+            }
+        }
+        return isRunning;
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -202,10 +225,6 @@ public class activity extends AppCompatActivity {
 
         pwPassword.requestFocus();
     }
-
-
-
-
 
     @NonNull
     private AlertDialog.Builder configDialog() {
@@ -495,31 +514,5 @@ public class activity extends AppCompatActivity {
         alarmManager.set(AlarmManager.ELAPSED_REALTIME, triggerAtTime, pendingIntent);
         editor.putBoolean("shutDownTask", true);
         editor.commit();
-    }
-
-
-
-    /*
-         * 判断服务是否启动,context上下文对象 ，className服务的name
-         */
-    public static boolean isServiceRunning(Context mContext, String className) {
-
-        boolean isRunning = false;
-        ActivityManager activityManager = (ActivityManager) mContext
-                .getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> serviceList = activityManager
-                .getRunningServices(30);
-
-        if (!(serviceList.size() > 0)) {
-            return false;
-        }
-
-        for (int i = 0; i < serviceList.size(); i++) {
-            if (serviceList.get(i).service.getClassName().contains(className) == true) {
-                isRunning = true;
-                break;
-            }
-        }
-        return isRunning;
     }
 }
